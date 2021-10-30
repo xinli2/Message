@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AJAX</title>
+</head>
+<body>
+<h1>Urban Dictionary Lookup</h1>
+Enter a term: <input type="text" id="howMany" onchange="sumOfInts()"> Choices limited to 'anime', 'ajax', 'cool, 'bro', 'fnord'
+<div id="divToChange">?</div>
+<script>
+textInput = document.getElementById("howMany");
+function sumOfInts() {
+var n = document.getElementById("howMany").value;
+// Construct an object
+var ajax = new XMLHttpRequest();
+// Send a query parameter to a PHP program
+ajax.open("GET", "message.php?n=" + n); // Arguments: method and url with query params
+ajax.send();
+// This high order anonymous function will execute when the server responds (a callback)
+ajax.onreadystatechange = function() {
+// Show the different states sent from the server 
+alert("State: " + ajax.readyState);
+if (ajax.readyState == 4 && ajax.status == 200) {
+// Do something with repsonseText after firstN.php runs
+document.getElementById("divToChange").innerHTML = '<br><i>'
++ ajax.responseText + '</i>';
+}
+}; // End anonymous high order function
+} // End function sumOfInts
+</script>
+</body>
+</html>
